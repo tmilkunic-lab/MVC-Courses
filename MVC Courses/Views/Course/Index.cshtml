@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MvcCourses.Models.Course>
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p class="mb-3">
+    <a asp-controller="Course" asp-action="Create" class="btn btn-primary">Add Course</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Home</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>No courses yet. <a asp-action="Create">Add one</a>.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Credits</th>
+                <th>Department</th>
+                <th>Online?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.Title</td>
+                    <td>@c.Credits</td>
+                    <td>@c.Department</td>
+                    <td>@(c.IsOnline ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
